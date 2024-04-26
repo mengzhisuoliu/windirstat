@@ -66,7 +66,7 @@ bool CModalShellApi::DoDeleteItem()
             (IsWindows8OrGreater() ? (FOFX_ADDUNDORECORD | FOFX_RECYCLEONDELETE) : FOF_ALLOWUNDO);
 
         // Do deletion operation
-        SmartPointer<LPITEMIDLIST> pidl(CoTaskMemFree, ILCreateFromPath(m_FileName.c_str()));
+        SmartPointer<LPITEMIDLIST> pidl(ILFree, ILCreateFromPath(m_FileName.c_str()));
         CComPtr<IShellItem> shellitem = nullptr;
         if (SHCreateItemFromIDList(pidl, IID_PPV_ARGS(&shellitem)) != S_OK) return false;
         

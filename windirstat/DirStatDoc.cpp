@@ -414,7 +414,7 @@ void CDirStatDoc::OpenItem(const CItem* item, const std::wstring & verb)
     ASSERT(item != nullptr);
 
     // determine path to feed into shell function
-    SmartPointer<LPITEMIDLIST> pidl(CoTaskMemFree, nullptr);
+    SmartPointer<LPITEMIDLIST> pidl(ILFree, nullptr);
     if (item->IsType(IT_MYCOMPUTER))
     {
         (void) SHGetSpecialFolderLocation(nullptr, CSIDL_DRIVES, &pidl);
@@ -1083,7 +1083,7 @@ void CDirStatDoc::OnExplorerSelect()
     for (const auto& path : paths)
     {
         // create path pidl
-        SmartPointer<LPITEMIDLIST> parent(CoTaskMemFree);
+        SmartPointer<LPITEMIDLIST> parent(ILFree);
         parent = ILCreateFromPath(path.c_str());
 
         // structures to hold and track pidls for children
